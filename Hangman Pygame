@@ -1,0 +1,131 @@
+import random
+import pygame
+pygame.init()
+screen = pygame.display.set_mode((1000, 700))
+white = (255, 255, 255)
+black = (0, 0, 0)
+words = [
+'apple', 'beach', 'child', 'drive', 'eagle', 'fable', 'grape', 'house', 'ideal', 'jolly',
+ 'knife', 'lemon', 'mango', 'night', 'ocean', 'piano', 'queen', 'tiger', 'vivid', 'water',
+ 'yacht', 'zebra', 'about', 'block', 'clock', 'doubt', 'equal', 'flute', 'glove', 'honey',
+ 'ivory', 'jumpy', 'lions', 'plaza', 'quilt', 'rider', 'stone', 'turns', 'vapor',
+ 'wrist', 'young', 'zoned', 'actor', 'bride', 'inch', 'noted', 'petal', 'silly', 'bliss', 'clash', 'glare', 'kill', 'leads', 'moral', 'noisy', 'offer', 'plaza',
+ 'quiz', 'rusty', 'safe', 'taunt', 'wage', 'zone', 'zippy', 'alpha', 'blind',
+ 'clash', 'dash', 'echo', 'flair', 'glove', 'helm', 'irony', 'jump', 'knee', 'lean', 'moth',
+ 'noble', 'open', 'prong', 'rank', 'sever', 'tall', 'upset', 'vent'
+
+
+]
+def get_word():
+    selected_word = random.choice(words)
+    return selected_word
+def win():
+    running = True
+    while running:
+        screen.fill((0, 255, 255))
+        pygame.draw.circle(screen, (255,255,0), (1000, 0), 100)
+        pygame.draw.rect(screen, (0,255,0), pygame.Rect(0, 500, 1000, 200))
+        pygame.draw.line(screen, black, (400, 650), (570, 650), 50)
+        pygame.draw.line(screen, black, (485, 650), (485, 150), 4)        
+        pygame.draw.line(screen, black, (485, 150), (700, 150), 4)
+        pygame.draw.line(screen, black, (700, 150), (700, 250), 1)
+        pygame.display.flip()
+    
+def lose(word):
+    running = True
+    while running:
+        screen.fill((0, 255, 255))
+        pygame.draw.circle(screen, (255,255,0), (1000, 0), 100)
+        pygame.draw.rect(screen, (0,255,0), pygame.Rect(0, 500, 1000, 200))
+        pygame.draw.line(screen, black, (400, 650), (570, 650), 50)
+        pygame.draw.line(screen, black, (485, 650), (485, 150), 4)        
+        pygame.draw.line(screen, black, (485, 150), (700, 150), 4)
+        pygame.draw.line(screen, black, (700, 150), (700, 250), 1)
+        pygame.draw.circle(screen, white, (700, 290), 50)
+        pygame.draw.circle(screen, black, (700, 290), 50, 5)
+        pygame.draw.line(screen, black, (700, 340), (700, 500), 2)
+        pygame.draw.line(screen, black, (700, 400), (650, 370), 2)
+        pygame.draw.line(screen, black, (700, 400), (750, 370), 2)
+        pygame.draw.line(screen, black, (700, 500), (650, 550), 2)
+        pygame.draw.line(screen, black, (700, 500), (750, 550), 2)
+        pygame.draw.line(screen, black, (670, 270), (690, 290), 2)
+        pygame.draw.line(screen, black, (690, 270), (670, 290), 2)
+        pygame.draw.line(screen, black, (710, 270), (730, 290), 2)
+        pygame.draw.line(screen, black, (730, 270), (710, 290), 2)
+        pygame.draw.line(screen, black, (680, 310), (720, 310), 2)
+        font1 = pygame.font.SysFont("arial", 50)
+        lost_message = font1.render(f'You lost. The word was: "{word}"', True, black)
+        screen.blit(lost_message, (70, 50))
+        pygame.display.flip()
+def draw(lives, word):
+    screen.fill((0, 255, 255))
+    pygame.draw.circle(screen, (255,255,0), (1000, 0), 100)
+    pygame.draw.rect(screen, (0,255,0), pygame.Rect(0, 500, 1000, 200))
+    pygame.draw.line(screen, black, (400, 650), (570, 650), 50)
+    pygame.draw.line(screen, black, (485, 650), (485, 150), 4)        
+    pygame.draw.line(screen, black, (485, 150), (700, 150), 4)
+    pygame.draw.line(screen, black, (700, 150), (700, 250), 1)
+    if lives <= 5:
+        pygame.draw.circle(screen, white, (700, 290), 50)
+        pygame.draw.circle(screen, black, (700, 290), 50, 5)
+        pygame.draw.line(screen, black, (680, 310), (720, 310), 2)
+        pygame.draw.circle(screen, black, (680, 275), 10)
+        pygame.draw.circle(screen, black, (720, 275), 10) 
+    if lives <= 4:
+        pygame.draw.line(screen, black, (700, 340), (700, 500), 2)
+    if lives <= 3:
+        pygame.draw.line(screen, black, (700, 400), (650, 370), 2)
+    if lives <= 2:
+        pygame.draw.line(screen, black, (700, 400), (750, 370), 2)
+    if lives <= 1:
+        pygame.draw.line(screen, black, (700, 500), (650, 550), 2)
+    if lives == 0:
+        lose(word)
+        
+def HM():
+    selected_word = get_word()
+    word = ['-' for _ in selected_word]
+    font = pygame.font.SysFont("arial", 50)
+    guessfont = pygame.font.SysFont('arial', 50)
+    outputfont = pygame.font.SysFont('arial', 100)
+    previous_guesses = []
+    lives = 6
+    running = True
+    clock = pygame.time.Clock()
+    while running:
+        if '-' in word:
+            screen.fill(white)
+            draw(lives, selected_word)
+            output = outputfont.render(' '.join(word), True, black)
+            screen.blit(output, (70, 300))
+            guesses_text = guessfont.render("Guesses: " + ', '.join(previous_guesses), True, black)
+            screen.blit(guesses_text, (70, 50))
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.unicode.isalpha():
+                        user_input = event.unicode.lower()
+                        if user_input in previous_guesses:
+                            continue
+                        previous_guesses.append(user_input)
+                        if user_input == selected_word:
+                            win()
+                            break
+                        elif user_input in selected_word:
+                            for i, letter in enumerate(selected_word):
+                                if letter == user_input:
+                                    word[i] = user_input
+                            continue
+                        else:
+                            lives -= 1
+                            if lives == 0:
+                                lose(selected_word)
+                                running = False
+                            
+            
+        else:
+            win()
+            break
+        pygame.display.flip() 
+        clock.tick(60)
+HM()
+pygame.quit()
