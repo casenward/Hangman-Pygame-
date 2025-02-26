@@ -1,5 +1,6 @@
 import random
 import pygame
+import math
 pygame.init()
 screen = pygame.display.set_mode((1000, 700))
 white = (255, 255, 255)
@@ -22,7 +23,12 @@ def no_play_again():
             screen.fill((0, 255, 255))
             pygame.draw.circle(screen, (255,255,0), (1000, 0), 100)
             pygame.draw.rect(screen, (0,255,0), pygame.Rect(0, 500, 1000, 200))
+            font = pygame.font.SysFont("arial", 100)
+            end_message = font.render("Thanks for playing!!!", True, black)
+            screen.blit(end_message, (60, 300))
             pygame.display.flip()
+            pygame.time.wait(2000)
+            pygame.quit()
 def get_word():
     selected_word = random.choice(words)
     return selected_word
@@ -36,6 +42,36 @@ def win():
         pygame.draw.line(screen, black, (485, 650), (485, 150), 4)        
         pygame.draw.line(screen, black, (485, 150), (700, 150), 4)
         pygame.draw.line(screen, black, (700, 150), (700, 250), 1)
+        pygame.draw.circle(screen, white, (700, 390), 50)
+        pygame.draw.circle(screen, black, (700, 390), 50, 5)
+        pygame.draw.line(screen, black, (700, 440), (700, 600), 2)
+        pygame.draw.line(screen, black, (700, 500), (650, 470), 2)
+        pygame.draw.line(screen, black, (700, 500), (750, 470), 2)
+        pygame.draw.line(screen, black, (700, 600), (650, 650), 2)
+        pygame.draw.line(screen, black, (700, 600), (750, 650), 2)
+        pygame.draw.circle(screen, black, (680, 375), 10)
+        pygame.draw.circle(screen, black, (720, 375), 10) 
+        pygame.draw.arc(screen, black, pygame.Rect(660, 370, 80, 50), math.radians(180), math.radians(360), 2)
+        font1 = pygame.font.SysFont("arial", 50)
+        font2 = pygame.font.SysFont("arial", 30)
+        font = pygame.font.SysFont("arial", 80)
+        win_message = font.render("Congratulations! You won", True, black)
+        screen.blit(win_message, (50, 50))
+        play_again = font1.render(f'Play again?', True, black)
+        screen.blit(play_again, (50, 310))
+        yes_button = pygame.draw.rect(screen, (0, 255, 255), (80, 400, 65, 30))
+        no_button = pygame.draw.rect(screen, (0, 255, 255), (160, 400, 50, 30))
+        yesNo = font2.render("Yes    No", True, black)
+        screen.blit(yesNo, (85, 400))
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                click_location = event.pos
+                if yes_button.collidepoint(click_location):
+                    HM()
+                    break
+                elif no_button.collidepoint(click_location):
+                    no_play_again()
+                    break
         pygame.display.flip()
     
 def lose(word):
@@ -115,6 +151,7 @@ def HM():
     lives = 6
     running = True
     clock = pygame.time.Clock()
+    print(selected_word)
     while running:
         if '-' in word:
             screen.fill(white)
