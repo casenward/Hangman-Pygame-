@@ -151,7 +151,6 @@ def HM():
     lives = 6
     running = True
     clock = pygame.time.Clock()
-    print(selected_word)
     while running:
         if '-' in word:
             screen.fill(white)
