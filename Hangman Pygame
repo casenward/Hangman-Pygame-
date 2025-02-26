@@ -6,17 +6,21 @@ screen = pygame.display.set_mode((1000, 700))
 white = (255, 255, 255)
 black = (0, 0, 0)
 words = [
-'apple', 'beach', 'child', 'drive', 'eagle', 'fable', 'grape', 'house', 'ideal', 'jolly',
- 'knife', 'lemon', 'mango', 'night', 'ocean', 'piano', 'queen', 'tiger', 'vivid', 'water',
- 'yacht', 'zebra', 'about', 'block', 'clock', 'doubt', 'equal', 'flute', 'glove', 'honey',
- 'ivory', 'jumpy', 'lions', 'plaza', 'quilt', 'rider', 'stone', 'turns', 'vapor',
- 'wrist', 'young', 'zoned', 'actor', 'bride', 'inch', 'noted', 'petal', 'silly', 'bliss', 'clash', 'glare', 'kill', 'leads', 'moral', 'noisy', 'offer', 'plaza',
- 'quiz', 'rusty', 'safe', 'taunt', 'wage', 'zone', 'zippy', 'alpha', 'blind',
- 'clash', 'dash', 'echo', 'flair', 'glove', 'helm', 'irony', 'jump', 'knee', 'lean', 'moth',
- 'noble', 'open', 'prong', 'rank', 'sever', 'tall', 'upset', 'vent'
-
-
+    "angel", "bloom", "creep", "dough", "elbow", "fancy", "ghost", "hobby", 
+    "input", "jewel", "kings", "lemon", "meant", "nicer", "orbit", "peace", 
+    "quick", "roast", "salty", "toast", "upper", "vivid", "waist", "xenon", 
+    "yeast", "zonal", "abode", "brisk", "crane", "dealt", "elude", "flick", 
+    "glare", "hoist", "intro", "joker", "kneel", "lunar", "mince", "newly", 
+    "ounce", "punch", "quest", "relic", "saint", "twist", "udder", "verge", 
+    "whelp", "xylem", "yearn", "zones", "anvil", "brace", "crisp", "delve", 
+    "evade", "flare", "glide", "hutch", "inlet", "jumpy", "knack", "limbo", 
+    "molar", "nerve", "ozone", "plush", "quilt", "risky", "scent", "trick", 
+    "urban", "venom", "whirl", "xenon", "yield", "zippy", "aptly", "broad", 
+    "chunk", "debug", "exalt", "flint", "gloom", "hover", "imply", "jolly", 
+    "kayak", "ledge", "muted", "niche", "olden", "punch", "quark", "revel", 
+    "salad", "twine", "utter", "vigil", "woven"
 ]
+
 def no_play_again():
         running = True
         while running:
