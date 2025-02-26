@@ -16,6 +16,13 @@ words = [
 
 
 ]
+def no_play_again():
+        running = True
+        while running:
+            screen.fill((0, 255, 255))
+            pygame.draw.circle(screen, (255,255,0), (1000, 0), 100)
+            pygame.draw.rect(screen, (0,255,0), pygame.Rect(0, 500, 1000, 200))
+            pygame.display.flip()
 def get_word():
     selected_word = random.choice(words)
     return selected_word
@@ -54,8 +61,24 @@ def lose(word):
         pygame.draw.line(screen, black, (730, 270), (710, 290), 2)
         pygame.draw.line(screen, black, (680, 310), (720, 310), 2)
         font1 = pygame.font.SysFont("arial", 50)
+        font2 = pygame.font.SysFont("arial", 30)
         lost_message = font1.render(f'You lost. The word was: "{word}"', True, black)
         screen.blit(lost_message, (70, 50))
+        play_again = font1.render(f'Play again?', True, black)
+        screen.blit(play_again, (50, 310))
+        yes_button = pygame.draw.rect(screen, (0, 255, 255), (80, 400, 65, 30))
+        no_button = pygame.draw.rect(screen, (0, 255, 255), (160, 400, 50, 30))
+        yesNo = font2.render("Yes    No", True, black)
+        screen.blit(yesNo, (85, 400))
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                click_location = event.pos
+                if yes_button.collidepoint(click_location):
+                    HM()
+                    break
+                elif no_button.collidepoint(click_location):
+                    no_play_again()
+                    break
         pygame.display.flip()
 def draw(lives, word):
     screen.fill((0, 255, 255))
